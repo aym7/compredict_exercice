@@ -4,11 +4,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from sklearn.preprocessing import StandardScaler
-
 
 # TODO : Inherit from a GenericView.
-class Standarizer(APIView):
+class StandarizerView(APIView):
     """ View to handle sensors'values standarization.
     Provides a POST request, expecting a dictionary of list of values.
     If the arguments are valid, will returned the data standarized using a standard scaler.

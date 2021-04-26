@@ -7,6 +7,7 @@ from rest_framework import status
 class TestStandarize(APITestCase):
     """ Test class for the "standarize" endpoint
     """
+
     def setUp(self):
         """ Prepares the data required for the tests (url, sensor, standardScaler, ...)
         """
@@ -43,8 +44,7 @@ class TestStandarize(APITestCase):
         self.assertEqual(rsp.status_code, status.HTTP_400_BAD_REQUEST)
 
         # Test error : Empty list
-        rsp = self.client.post(self.url, {"sensor1": []
-                                          }, format="json")
+        rsp = self.client.post(self.url, {"sensor1": []}, format="json")
         self.assertFalse(rsp.data['success'])
         self.assertEqual(rsp.status_code, status.HTTP_400_BAD_REQUEST)
 
