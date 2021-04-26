@@ -1,10 +1,12 @@
 from django.urls import reverse
 from sklearn.preprocessing import StandardScaler
-from rest_framework.test import APIRequestFactory, APITestCase
+from rest_framework.test import APITestCase
 from rest_framework import status
 
 
 class TestStandarize(APITestCase):
+    """ Test class for the "standarize" endpoint
+    """
     def setUp(self):
         """ Prepares the data required for the tests (url, sensor, standardScaler, ...)
         """
@@ -30,6 +32,7 @@ class TestStandarize(APITestCase):
                                           "sensor1": [5.45, 2.787]
                                           }, format="json")
         self.assertFalse(rsp.data['success'])
+        self.assertEqual(rsp.status_code, status.HTTP_400_BAD_REQUEST)
 
         # Test error : One of the list doesn't have the same length as the other
         rsp = self.client.post(self.url, {"sensor1": [1.5454, 5465465.54],
@@ -37,6 +40,13 @@ class TestStandarize(APITestCase):
                                           "sensor3": [5.45, 2.787]
                                           }, format="json")
         self.assertFalse(rsp.data['success'])
+        self.assertEqual(rsp.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # Test error : Empty list
+        rsp = self.client.post(self.url, {"sensor1": []
+                                          }, format="json")
+        self.assertFalse(rsp.data['success'])
+        self.assertEqual(rsp.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_standarization(self):
         """ Tests the standarization's validity.
