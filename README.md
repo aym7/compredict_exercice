@@ -1,6 +1,7 @@
-# Compredict exercice
+# Sensors standarizer
 
-The following deposit contains the code required for compredict recruitment, phase 2.
+The following deposit contains a Django + DjangoRestFramework application.
+Its purpose is to standarize sensors data
 
 ## Preparing and launching the project and tests
 
